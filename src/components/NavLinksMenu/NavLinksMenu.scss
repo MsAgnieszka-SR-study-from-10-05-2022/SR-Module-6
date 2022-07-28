@@ -1,0 +1,18 @@
+@import '../../universalStyles/colors';
+
+.nav-links-menu {
+  background-color: $darkVioletColor;
+  height: 60px;
+  box-shadow: 0 0 10px $mainDarkColor;
+
+  &__list {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 0 auto;
+    padding: 0 10px;
+    height: 100%;
+    max-width: 1024px;
+    list-style: none;
+  }
+}

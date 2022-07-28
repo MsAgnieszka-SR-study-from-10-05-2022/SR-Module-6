@@ -1,0 +1,10 @@
+@import '../../universalStyles/colors';
+
+.input {
+  padding: 5px 10px;
+  width: 60%;
+  color: $mainDarkColor;;
+  background-color: $almostWhiteColor;
+  border-radius: 5px;
+  border: 1px solid $mainDarkColor;
+}
