@@ -1,0 +1,28 @@
+{
+  "emails": [
+    {
+      "email": "test@gmail.com",
+      "id": "24513998"
+    },
+    {
+      "email": "samantha278@gmail.com",
+      "id": "24513258"
+    },
+    {
+      "email": "hammer127@example.com",
+      "id": "23518254"
+    },
+    {
+      "email": "john.lennon1@gmail.com",
+      "id": "22545138"
+    },
+    {
+      "email": "jessica.apple@yahoo.com",
+      "id": "23258451"
+    },
+    {
+      "email": "petraomot5@dumb.com",
+      "id": "51322458"
+    }
+  ]
+}

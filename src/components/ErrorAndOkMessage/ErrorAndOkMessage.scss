@@ -1,0 +1,16 @@
+@import '../../universalStyles/colors';
+
+.error-message,
+.ok-message {
+  padding-right: 10px;
+  font-size: 13px;
+  text-align: end;
+}
+
+.error-message {
+  color: $errorColor;
+}
+
+.ok-message {
+  color: $okColor;
+}

@@ -6,7 +6,8 @@ const colors = {
   midVioletColor: '#724C9D',
   lightVioletColor: '#c5a7e6',
   pinkColor: '#ba87c6',
-  errorColor: '#ff0000'
+  errorColor: '#d80707',
+  okColor: '#168502'
 }
 
 export default colors
