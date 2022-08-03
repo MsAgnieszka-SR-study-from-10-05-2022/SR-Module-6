@@ -9,9 +9,11 @@ import 'components/InputWrapper/InputWrapper.scss'
 export const InputWrapper = (props) => {
   const {
     className,
+    inputEmailRef,
     title,
     label,
-    emailError,
+    emailErrorRegExp,
+    emailInBaseError,
     errorPassword,
     errorsPasswordDetails,
     errorConfirmPassword,
@@ -31,19 +33,34 @@ export const InputWrapper = (props) => {
           {label}
         </label>
         <Input
+          inputEmailRef={inputEmailRef}
           id={title}
           name={title}
           onChange={onChange}
-          className={errorPassword ? ` ${'input-error'}` : ''}
+          className={`
+            ${errorPassword ?
+            ` ${'input-error'}`
+              :
+                (emailInBaseError || emailErrorRegExp) ?
+            ` ${'input-error'}`
+                  :
+                  errorConfirmPassword ?
+                  ` ${'input-error'}`
+                    :
+                    ''}`
+          }
           {...otherProps}
         />
       </div>
       <div className={'input-validation'}>
         {
-          emailError ?
-            <ErrorMessage key={'emailError'}> - E-mail is already exists in our base</ErrorMessage>
+          emailInBaseError ?
+            <ErrorMessage key={'emailInBaseError'}> - E-mail is already exists in our base</ErrorMessage>
             :
-            ''
+            emailErrorRegExp ?
+              <ErrorMessage key={'emailErrorRegExp'}> - E-mail is incorrect</ErrorMessage>
+              :
+              ''
         }
 
         {
@@ -87,9 +104,11 @@ export const InputWrapper = (props) => {
 
 InputWrapper.propTypes = {
   className: PropTypes.string,
+  inputEmailRef: PropTypes.object,
   title: PropTypes.string,
   label: PropTypes.string,
-  emailError: PropTypes.bool,
+  emailErrorRegExp: PropTypes.bool,
+  emailInBaseError: PropTypes.bool,
   errorPassword: PropTypes.bool,
   errorsPasswordDetails: PropTypes.object,
   errorConfirmPassword: PropTypes.bool,

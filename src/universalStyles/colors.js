@@ -4,9 +4,10 @@ const colors = {
   mainDarkColor: '#0B0205',
   darkVioletColor: '#2C1B47',
   midVioletColor: '#724C9D',
+  midVioletBgColor: '#724c9d77',
   lightVioletColor: '#c5a7e6',
   pinkColor: '#ba87c6',
-  errorColor: '#d80707',
+  errorBgColor: '#d807071e',
   okColor: '#168502'
 }
 
