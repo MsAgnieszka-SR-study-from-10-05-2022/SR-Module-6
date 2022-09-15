@@ -2,7 +2,11 @@
 
 .input {
   padding: 5px 10px;
-  width: 60%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
+  width: 70%;
+  height: 31px;
   color: $mainDarkColor;;
   background-color: $almostWhiteColor;
   border-radius: 5px;

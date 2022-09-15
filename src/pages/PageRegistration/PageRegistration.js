@@ -82,11 +82,10 @@ export const PageRegistration = (props) => {
 
   const checkEmailWithRegExp = () => {
     if (!regExpEmailToCheck.test(email)) {
-      setEmailErrorRegExp(true)
+      return setEmailErrorRegExp(() => true)
     } else {
-      setEmailErrorRegExp(false)
+      return setEmailErrorRegExp(() => false)
     }
-    console.log('emailErrorRegExp: ', emailErrorRegExp)
   }
 
   const checkEmailWithBase = () => {
@@ -109,10 +108,11 @@ export const PageRegistration = (props) => {
   // function for password
   const checkPassword = () => {
     if (!regExpPasswordToCheck.test(password)) {
-      setPasswordErrorRegExp(true)
+      setPasswordErrorRegExp(() => true)
 
       // checking uppercase letters
       if (upperCaseLetterToCheck.test(password) < 1) {
+        // console.log('The form is invalid')
         setPasswordErrorDetail((prevState) => {
           return { ...prevState, upperCaseLetter: true }
         })
@@ -185,80 +185,33 @@ export const PageRegistration = (props) => {
     }
   }
 
-  // React.useEffect(() => {
-  //   checkConfirmPassword()
-  // }, [checkConfirmPassword])
+  let formValid = false
 
-  // let formVal = false
-
-  // if (email !== '' &&
-  //     password !== '' &&
-  //     confirmPassword !== '' &&
-  //     !emailInBaseError &&
-  //     !passwordErrorRegExp &&
-  //     !confirmPasswordError) {
-  //   formVal = true
-  // }
-
-  // function checking valid form
-  const checkValidForm = React.useCallback(() => {
-    if (email !== '' &&
+  if (email !== '' &&
       password !== '' &&
       confirmPassword !== '' &&
       !emailInBaseError &&
-      !emailErrorRegExp &&
       !passwordErrorRegExp &&
       !confirmPasswordError) {
-      return setIsValidForm(() => true)
-    } else {
-      return setIsValidForm(() => false)
-    }
-  }, [confirmPassword, confirmPasswordError, email, emailErrorRegExp, emailInBaseError, password, passwordErrorRegExp])
-
-  React.useEffect(() => {
-    checkValidForm()
-  }, [checkValidForm])
-
-  // const finalResult = () => {
-  //   if (isValidForm) {
-  //     console.log('The form was sent')
-  //     console.log('data: ', inputFields)
-
-  //     setInputField({
-  //       email: '',
-  //       password: '',
-  //       confirmPassword: ''
-  //     })
-  //     return
-  //   }
-
-  //   if (!isValidForm) {
-  //     return console.log('The form is invalid')
-  //   }
-  // }
+    formValid = true
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
     getEmailsFromBase()
     checkPassword()
     checkConfirmPassword()
-    checkValidForm()
-    // finalResult()
 
-    if (isValidForm) {
-      console.log('The form was sent')
+    if (!formValid) {
+      console.log('The form is invalid')
+    } else {
       console.log('data: ', inputFields)
-
-      setInputField({
+      console.log('The form was sent')
+      return setInputField({
         email: '',
         password: '',
         confirmPassword: ''
       })
-      return
-    }
-
-    if (!isValidForm) {
-      return console.log('The form is invalid')
     }
   }
 
@@ -292,6 +245,7 @@ export const PageRegistration = (props) => {
           errorsPasswordDetails={passwordErrorDetails}
           disabled={disabledField}
           onChange={handleChange}
+          onBlur={checkPassword}
           style={{ backgroundColor: disabledField ? `${colors.midVioletBgColor}` : '' }}
 
         />
@@ -304,6 +258,7 @@ export const PageRegistration = (props) => {
           errorConfirmPassword={confirmPasswordError}
           disabled={disabledField}
           onChange={handleChange}
+          onBlur={checkConfirmPassword}
           style={{ backgroundColor: disabledField ? `${colors.midVioletBgColor}` : '' }}
         />
         <Button
