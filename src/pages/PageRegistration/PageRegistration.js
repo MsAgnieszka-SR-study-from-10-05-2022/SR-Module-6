@@ -1,9 +1,10 @@
 import React from 'react'
 
+import Form from 'components/Form'
 import InputWrapper from 'components/InputWrapper'
 import Button from 'components/Button'
 
-import 'pages/PageRegistration/PageRegistration.scss'
+// import 'pages/PageRegistration/PageRegistration.scss'
 import colors from 'universalStyles/colors'
 
 export const PageRegistration = (props) => {
@@ -218,57 +219,53 @@ export const PageRegistration = (props) => {
   const disabledField = !!emailErrorRegExp || !!emailInBaseError
 
   return (
-    <div className={'registration-form-wrapper'}>
-      <form
-        onSubmit={handleSubmit}
-        className={'registration-form'}
-        {...otherProps}
-      >
-        <h2 className={'registration-form__header'}>Create an account</h2>
-        <InputWrapper
-          inputEmailRef={inputEmailRef}
-          title={'email'}
-          value={email}
-          label={'Your e-mail:'}
-          emailErrorRegExp={emailErrorRegExp}
-          emailInBaseError={emailInBaseError}
-          onChange={handleChange}
-          onBlur={emailErrorRegExpBlur}
-        />
+    <Form
+      onSubmit={handleSubmit}
+      formTitle={'Create an account'}
+      {...otherProps}
+    >
+      <InputWrapper
+        inputEmailRef={inputEmailRef}
+        title={'email'}
+        value={email}
+        label={'Your e-mail:'}
+        emailErrorRegExp={emailErrorRegExp}
+        emailInBaseError={emailInBaseError}
+        onChange={handleChange}
+        onBlur={emailErrorRegExpBlur}
+      />
 
-        <InputWrapper
-          title={'password'}
-          value={password}
-          label={'Password:'}
-          type={'password'}
-          errorPassword={passwordErrorRegExp}
-          errorsPasswordDetails={passwordErrorDetails}
-          disabled={disabledField}
-          onChange={handleChange}
-          onBlur={checkPassword}
-          style={{ backgroundColor: disabledField ? `${colors.midVioletBgColor}` : '' }}
+      <InputWrapper
+        title={'password'}
+        value={password}
+        label={'Password:'}
+        type={'password'}
+        errorPassword={passwordErrorRegExp}
+        errorsPasswordDetails={passwordErrorDetails}
+        disabled={disabledField}
+        onChange={handleChange}
+        onBlur={checkPassword}
+        style={{ backgroundColor: disabledField ? `${colors.midVioletBgColor}` : '' }}
+      />
 
-        />
+      <InputWrapper
+        title={'confirmPassword'}
+        value={confirmPassword}
+        label={'Repeat password:'}
+        type={'password'}
+        errorConfirmPassword={confirmPasswordError}
+        disabled={disabledField}
+        onChange={handleChange}
+        onBlur={checkConfirmPassword}
+        style={{ backgroundColor: disabledField ? `${colors.midVioletBgColor}` : '' }}
+      />
 
-        <InputWrapper
-          title={'confirmPassword'}
-          value={confirmPassword}
-          label={'Repeat password:'}
-          type={'password'}
-          errorConfirmPassword={confirmPasswordError}
-          disabled={disabledField}
-          onChange={handleChange}
-          onBlur={checkConfirmPassword}
-          style={{ backgroundColor: disabledField ? `${colors.midVioletBgColor}` : '' }}
-        />
-        <Button
-          label={'Register'}
-          disabled={disabledField}
-          style={{ cursor: disabledField ? 'not-allowed' : '' }}
-        />
-
-      </form>
-    </div>
+      <Button
+        label={'Register'}
+        disabled={disabledField}
+        style={{ cursor: disabledField ? 'not-allowed' : 'pointer' }}
+      />
+    </Form>
   )
 }
 
