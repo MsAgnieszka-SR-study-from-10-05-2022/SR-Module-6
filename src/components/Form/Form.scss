@@ -5,7 +5,7 @@
   flex-direction: column;
   align-items: center;
   margin: 15px auto;
-  padding: 10px 0;
+  padding: 10px 40px;
   max-width: 400px;
   background-color: $lightVioletColor;
   border-radius: 5px;
@@ -14,4 +14,8 @@
   &__header {
     margin: 10px 5px 20px;
   }
+
+  // &__step-number {
+  //   margin-bottom: 10px;
+  // }
 }

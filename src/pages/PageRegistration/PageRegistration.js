@@ -4,7 +4,6 @@ import Form from 'components/Form'
 import InputWrapper from 'components/InputWrapper'
 import Button from 'components/Button'
 
-// import 'pages/PageRegistration/PageRegistration.scss'
 import colors from 'universalStyles/colors'
 
 export const PageRegistration = (props) => {
