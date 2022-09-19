@@ -7,12 +7,15 @@ export const Button = (props) => {
   const {
     className,
     label,
+    disabled,
     ...otherProps
   } = props
 
   return (
     <button
       className={`button${className ? ` ${className}` : ''}`}
+      disabled={disabled}
+      style={{ display: disabled ? 'none' : 'block' }}
       {...otherProps}
     >
       {label}
@@ -22,7 +25,8 @@ export const Button = (props) => {
 
 Button.propTypes = {
   className: PropTypes.string,
-  label: PropTypes.string
+  label: PropTypes.string,
+  disabled: PropTypes.bool
 }
 
 export default Button

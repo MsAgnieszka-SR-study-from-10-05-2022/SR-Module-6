@@ -1,17 +1,20 @@
 import React from 'react'
+
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
-// eslint-disable-next-line no-unused-vars
-import { useForm } from 'react-hook-form'
-
-import Form from 'components/Form'
+import Form, { FormSummary } from 'components/Form'
 import Input from 'components/Input'
 import Button from 'components/Button'
-import styled from 'styled-components'
 
 const StepNumber = styled.p`
   margin-bottom: 10px;
   text-decoration: underline;
+`
+const ButtonsWrapper = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
 `
 
 export const PageStepByStepForm = (props) => {
@@ -20,143 +23,108 @@ export const PageStepByStepForm = (props) => {
     ...otherProps
   } = props
 
+  // state
   const [step, setStep] = React.useState(1)
+  // eslint-disable-next-line no-unused-vars
+  const [formData, setFormData] = React.useState({
+    name: '',
+    age: '',
+    notices: ''
+  })
 
-  const defaultValueColors = [
-    'red',
-    'green',
-    'blue',
-    'yellow',
-    'pink',
-    'black'
-  ]
+  const {
+    name,
+    age,
+    notices
+  } = formData
 
-  const capitalize = (word) => (word && word[0].toUpperCase() + word.slice(1)) || ''
+  // default values
+  const FormTitles = ['Personal info', 'Age', 'Your notices']
 
-  const onSubmit = (e) => {
-    e.preventDefault()
-  }
-
+  // functions
   const prevStep = () => {
-    setStep((prevStep) => prevStep - 1)
+    setStep((currentStep) => currentStep - 1)
   }
-
   const nextStep = () => {
-    setStep((prevStep) => prevStep + 1)
+    setStep((currentStep) => currentStep + 1)
   }
-
-  const resetForm = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    alert('FORM SUBMITTED')
+    setFormData({
+      ...formData,
+      name: '',
+      age: '',
+      notices: ''
+    })
     setStep(1)
-    console.log('formularz zresetowany')
-    // wyzerować dane wprowadzone do formularza
-  }
-
-  const sendForm = () => {
-    setStep(1)
-    console.log('formularz wysłany')
-    // wyzerować dane wprowadzone do formularza
-    // wyświetlić w konsoli wysłane dane
+    console.log('data: ', formData)
   }
 
   return (
     <Form
-      onSubmit={onSubmit}
+      onSubmit={handleSubmit}
       formTitle={'Step by step form'}
       {...otherProps}
     >
       <StepNumber>
-        Step {step}
+        Step {step} - {step < 4 ? FormTitles[step - 1] : 'SUMMARY'}
       </StepNumber>
       {step <= 1 ?
-      // zrobić komponent Name
-        <>
-          <Input
-            className={'step-by-step-form__input'}
-            placeholder={'What is your name?'}
-            // value={nameFromInput}
-            type={'text'}
-          />
-          <Button
-            onClick={nextStep}
-            label={'Next >>'}
-          />
-        </>
+      // step Name
+        <Input
+          type={'text'}
+          placeholder={'What\'s your name?'}
+          name={'name'}
+          value={name}
+          onChange={(e) => {
+            setFormData({ ...formData, name: e.target.value })
+          }}
+        />
         :
-        step > 1 && step < 3 ?
-        // zrobić komponent Age
-          <>
-            <Input
-              placeholder={'How old are you?'}
-              // value={ageFromInput}
-              type={'number'}
-            />
-            <div className={'step-by-step-form__buttons'}>
-              <Button
-                label={'<< Prev'}
-                onClick={prevStep}
-              />
-              <Button
-                label={'Next >>'}
-                onClick={nextStep}
-              />
-            </div>
-          </>
+        step === 2 ?
+        // step Age
+          <Input
+            type={'number'}
+            placeholder={'How old are you?'}
+            name={'age'}
+            value={age}
+            onChange={(e) => {
+              setFormData({ ...formData, age: e.target.value })
+            }}
+          />
           :
           step === 3 ?
-          // zrobić komponent Color
-            <>
-              {/* <label>What is your favorite color? */}
-              <select
-                className={'step-by-step-form__select'}
-                // placeholder={'What is your favorite color?'}
-                defaultValue={''}
-              >
-                <option
-                  value={''}
-                  disabled
-                >
-                  What is your favorite color?
-                </option>
-                {defaultValueColors.map((color) => {
-                  return <option
-                    key={color}
-                    value={color}
-                         >{capitalize(color)}
-                         </option>
-                })}
-              </select>
-
-              <div className={'step-by-step-form__buttons'}>
-                <Button
-                  label={'<< Prev'}
-                  onClick={prevStep}
-                />
-                <Button
-                  label={'Summary'}
-                  onClick={nextStep}
-                />
-              </div>
-            </>
+          // step Notices
+            <Input
+              type={'text'}
+              placeholder={'You can write here your thoughts...'}
+              name={'notices'}
+              value={notices}
+              onChange={(e) => {
+                setFormData({ ...formData, notices: e.target.value })
+              }}
+            />
             :
-            step === 4 ?
-            // zrobić komponent Summary
-              <>
-                <Button
-                  label={'Submit'}
-                  onClick={sendForm}
-                  // onClick={() => { console.log('submit') }}
-                />
-                <Button
-                  label={'Reset form'}
-                  onClick={resetForm}
-                  // onClick={() => { console.log('reset wprowadzonych danych') }}
-                />
-              </>
-              : <>
-                <p className={'step-by-step-form__summary-data'}>Tutaj będą dane podane w formularzu</p>
-                <p className={'step-by-step-form__info-success'}>Form was send</p>
-                </>
+            <FormSummary
+              name={name}
+              age={age}
+              notices={notices}
+            />
             }
+      <ButtonsWrapper>
+        <Button
+          disabled={step === 1 || step === FormTitles.length + 1}
+          onClick={prevStep}
+          label={'<< Prev'}
+          type={'button'}
+        />
+        <Button
+          label={step === FormTitles.length + 1 ? 'Submit' : 'Next >>'}
+          onClick={nextStep}
+          type={step === FormTitles.length + 2 ? 'submit' : 'button'}
+        />
+      </ButtonsWrapper>
     </Form>
   )
 }

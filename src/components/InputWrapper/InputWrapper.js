@@ -9,7 +9,7 @@ import 'components/InputWrapper/InputWrapper.scss'
 export const InputWrapper = (props) => {
   const {
     className,
-    inputEmailRef,
+    // inputEmailRef,
     title,
     label,
     emailErrorRegExp,
@@ -33,7 +33,7 @@ export const InputWrapper = (props) => {
           {label}
         </label>
         <Input
-          inputEmailRef={inputEmailRef}
+          // ref={inputEmailRef}
           id={title}
           name={title}
           onChange={onChange}
@@ -104,7 +104,7 @@ export const InputWrapper = (props) => {
 
 InputWrapper.propTypes = {
   className: PropTypes.string,
-  inputEmailRef: PropTypes.object,
+  // inputEmailRef: PropTypes.object,
   title: PropTypes.string,
   label: PropTypes.string,
   emailErrorRegExp: PropTypes.bool,
