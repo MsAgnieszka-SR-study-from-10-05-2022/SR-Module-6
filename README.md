@@ -3,7 +3,7 @@
 ___________________________
 
 ## Tasks:
-### 1. Registration form
+### 1. Registration form - 'done'
 This form checks:
 -> if the entered password:
 * contains at least one lowercase letter
@@ -14,10 +14,10 @@ This form checks:
 -> on blur if there is a user with given e-mail address in the database and if such e-mail exists in the database, the password fields and the button are disabled
 If the fields does't meet the criteria, information about it are displayed below the field.
 ##
-### 2. Step by step form
-This form has 3 steps where you can give your name, age and select your favorite color. At the end you can reset or submit your answers.
+### 2. Step by step form - 'almost done'
+This form has 3 steps where you are asked for your name, age and you can write your thoughts or anything. At the end you can submit your answers and the form is cleared.
 ##
-### 3. Form with captcha
+### 3. Form with captcha - 'to do'
 This form includes extra Captcha field to check if you are real person.
 
 ___________________________
